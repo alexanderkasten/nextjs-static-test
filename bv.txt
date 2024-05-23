@@ -1,0 +1,276 @@
+3:I[39275,[],""]
+4:I[61343,[],""]
+0:["M7VtkBnlqLKQyitJG6UeV",[[["",{"children":["bv",{"children":["__PAGE__",{}]}]},"$undefined","$undefined",true],["",{"children":["bv",{"children":["__PAGE__",{},[["$L1","$L2"],null],null]},["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children","bv","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined","styles":[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/ab42fd664535ee7e.css","precedence":"next","crossOrigin":"$undefined"}]]}],null]},[["$","html",null,{"lang":"en","children":["$","body",null,{"className":"__className_aaf875","children":["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":"404"}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],"notFoundStyles":[],"styles":null}]}]}],null],null],[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/c4f28165a4961013.css","precedence":"next","crossOrigin":"$undefined"}]],"$L5"]]]]
+6:I[78199,["199","static/chunks/199-7adf3c3861d7aff5.js","706","static/chunks/app/bv/page-89db5c8bb0c49fd3.js"],"BPMNViewerNextJS"]
+7:T400e,<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="AddOrderMsg_Definition" targetNamespace="http://bpmn.io/schema/bpmn" exporter="5Minds Studio" exporterVersion="1">
+  <bpmn:collaboration id="Collaboration_1cidyxu" name="">
+    <bpmn:participant id="AddOrderMsg" name="AddOrderMsg" processRef="AddOrderMsg_Process" />
+  </bpmn:collaboration>
+  <bpmn:process id="AddOrderMsg_Process" name="AddOrderMsg" isExecutable="true">
+    <bpmn:laneSet>
+      <bpmn:lane id="Lane_0lqx87w" name="Antragsteller">
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_188rxeb</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Auftrag_einstellen</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_02e6ooj" name="Genehmiger">
+        <bpmn:flowNodeRef>Gateway_1nenmhi</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_160n41f</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Auftrag_genehmigen</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Auftrag_einreichen</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_1" name="Auftrag erstellen">
+      <bpmn:outgoing>Flow_0919w0q</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0919w0q" sourceRef="StartEvent_1" targetRef="Gateway_188rxeb" />
+    <bpmn:sequenceFlow id="Flow_0ifmesk" sourceRef="Auftrag_einstellen" targetRef="Auftrag_genehmigen" />
+    <bpmn:exclusiveGateway id="Gateway_1nenmhi" name="Genehmigt?">
+      <bpmn:incoming>Flow_0x3zs9j</bpmn:incoming>
+      <bpmn:outgoing>Flow_041z2da</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0rz02v1</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0x3zs9j" sourceRef="Auftrag_genehmigen" targetRef="Gateway_1nenmhi" />
+    <bpmn:exclusiveGateway id="Gateway_188rxeb">
+      <bpmn:incoming>Flow_0919w0q</bpmn:incoming>
+      <bpmn:incoming>Flow_041z2da</bpmn:incoming>
+      <bpmn:outgoing>Flow_0mdjqvb</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0mdjqvb" sourceRef="Gateway_188rxeb" targetRef="Auftrag_einstellen" />
+    <bpmn:sequenceFlow id="Flow_041z2da" sourceRef="Gateway_1nenmhi" targetRef="Gateway_188rxeb">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">!token.current.genehmigt</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0rz02v1" sourceRef="Gateway_1nenmhi" targetRef="Auftrag_einreichen">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">token.current.genehmigt</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="Event_160n41f" name="Auftrag erstellt">
+      <bpmn:incoming>Flow_04e5uqm</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_04e5uqm" sourceRef="Auftrag_einreichen" targetRef="Event_160n41f" />
+    <bpmn:dataObjectReference id="auftrag" name="Auftrag" dataObjectRef="DataObject_0cvx93q" />
+    <bpmn:dataObject id="DataObject_0cvx93q" />
+    <bpmn:userTask id="Auftrag_einstellen" name="Auftrag einstellen">
+      <bpmn:documentation>## Auftrag einstellen: Ein UserTask im Detail
+
+Der UserTask "Auftrag einstellen" ist ein essenzieller Bestandteil des Prozessmodells, der es Benutzern ermöglicht, neue Aufträge mit spezifischen Details anzulegen. Dieser Task ist direkt auf die Interaktion mit dem Benutzer ausgerichtet und fordert zur Eingabe von drei Schlüsselinformationen auf: Produkt, Menge und Hinweis.
+
+## Eingabefelder erklärt
+
+### Produkt
+
+Das Feld "Produkt" dient der Identifikation des gewünschten Artikels. Benutzer können aus einer vordefinierten Liste wählen oder einen Produktnamen eingeben, falls das System eine solche Flexibilität unterstützt.
+
+### Menge
+
+Im Feld "Menge" geben Benutzer die gewünschte Anzahl des Produkts an. Dies ermöglicht eine präzise Bestandskontrolle und Planung der Lieferkette.
+
+### Hinweis
+
+Das optionale Feld "Hinweis" bietet Raum für zusätzliche Anmerkungen oder spezielle Anforderungen bezüglich des Auftrags. Dies kann von Lieferanweisungen bis hin zu Produktanpassungen reichen.
+
+## Prozessintegration
+
+Nach der Eingabe dieser Informationen durch den Benutzer wird der Auftrag zur weiteren Verarbeitung eingereicht. Dies kann die Überprüfung der Verfügbarkeit, die Preisberechnung und die Bestätigung des Auftrags umfassen. Der UserTask "Auftrag einstellen" ist somit ein kritischer Punkt im Prozess, der direkten Einfluss auf die Kundenzufriedenheit und die Effizienz der Auftragsabwicklung hat.
+
+## Vorteile der strukturierten Dateneingabe
+
+Durch die strukturierte Erfassung von Produktdetails, Mengen und Hinweisen können Prozesse effizienter gestaltet werden. Es reduziert Fehler bei der Auftragserfassung und verbessert die Kommunikation zwischen den Abteilungen. Zudem ermöglicht es eine bessere Anpassung an Kundenwünsche und eine optimierte Lagerhaltung.</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="produkt" label="Produkt" type="string" defaultValue="${dataObjects.auftrag? dataObjects.auftrag.produkt: &#39;&#39;}" />
+          <camunda:formField id="menge" label="Menge" type="long" defaultValue="${dataObjects.auftrag? dataObjects.auftrag.menge: &#39;&#39;}" />
+          <camunda:formField id="hinweis" label="Hinweis" type="string" defaultValue="${!!dataObjects.auftrag? dataObjects.auftrag.hinweis : &#39;&#39;}" customForm="{&#34;multiline&#34;:&#34;true&#34;}" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0mdjqvb</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ifmesk</bpmn:outgoing>
+      <bpmn:property id="Property_0y8h7y0" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_1x0953j">
+        <bpmn:sourceRef>auftrag</bpmn:sourceRef>
+        <bpmn:targetRef>Property_0y8h7y0</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0g4ks1u">
+        <bpmn:targetRef>auftrag</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:userTask>
+    <bpmn:userTask id="Auftrag_genehmigen" name="Auftrag genehmigen">
+      <bpmn:documentation>## Auftrag genehmigen: Der entscheidende Schritt zur Bestellung
+
+Der UserTask "Auftrag genehmigen" ist ein kritischer Schritt im Prozess der Auftragsbearbeitung, der die Überprüfung und Genehmigung von Aufträgen vor deren finaler Einreichung umfasst. Dieser Task stellt sicher, dass alle Auftragsdetails korrekt sind und die Bestellung den Unternehmensrichtlinien entspricht.
+
+## Das Feld "Genehmigen"
+
+### Überblick
+
+Das zentrale Element dieses UserTasks ist das Feld "Genehmigen". Dieses Feld ist typischerweise als Checkbox oder Schalter implementiert, durch dessen Aktivierung der Auftrag für die Einreichung freigegeben wird.
+
+### Funktionsweise
+
+Die Genehmigung erfolgt nach einer sorgfältigen Überprüfung des Auftrags durch eine autorisierte Person, oft eine Führungskraft oder eine speziell dafür vorgesehene Abteilung. Die Überprüfung umfasst die Kontrolle der Auftragsdetails, wie Produktbeschreibungen, Mengenangaben und etwaige Hinweise. Nur wenn alle Aspekte des Auftrags den Anforderungen entsprechen, wird das Feld "Genehmigen" aktiviert, und der Auftrag kann zur Bestellung weitergeleitet werden.
+
+## Prozessintegration und Auswirkungen
+
+Nach der Genehmigung des Auftrags durch das Feld "Genehmigen" wird der Prozess zur finalen Bestellung angestoßen. Dies kann die Übermittlung des Auftrags an den Lieferanten, die Aktualisierung des Lagerbestands und die Benachrichtigung des Kunden über die bevorstehende Lieferung beinhalten.
+
+Die Integration dieses Genehmigungsschritts trägt maßgeblich zur Qualitätssicherung bei. Sie verhindert, dass fehlerhafte oder unvollständige Aufträge weitergeleitet werden, was Zeit und Ressourcen spart und die Kundenzufriedenheit erhöht.
+
+## Vorteile der Genehmigung
+
+Die explizite Genehmigung von Aufträgen bietet mehrere Vorteile:
+
+* **Qualitätssicherung:** Sie stellt sicher, dass alle Aufträge den internen Standards entsprechen.
+* **Risikominimierung:** Sie verhindert Fehler in der Bestellabwicklung, die zu Verlusten führen können.
+* **Transparenz:** Sie schafft einen nachvollziehbaren Genehmigungsprozess, der für alle Beteiligten einsehbar ist.
+* **Kundenzufriedenheit:** Sie gewährleistet, dass Kundenanforderungen präzise erfüllt werden, was die Zufriedenheit steigert.</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="produkt" label="Produkt" type="string" defaultValue="${dataObjects.auftrag.produkt}" />
+          <camunda:formField id="menge" label="Menge" type="long" defaultValue="${dataObjects.auftrag.menge}" />
+          <camunda:formField id="hinweis" label="Hinweis" type="string" defaultValue="${dataObjects.auftrag.hinweis}" customForm="{&#34;multiline&#34;:&#34;true&#34;}" />
+          <camunda:formField id="genehmigt" label="Genehmigen?" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0ifmesk</bpmn:incoming>
+      <bpmn:outgoing>Flow_0x3zs9j</bpmn:outgoing>
+      <bpmn:property id="Property_0ugc2qp" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_1ho724r">
+        <bpmn:sourceRef>auftrag</bpmn:sourceRef>
+        <bpmn:targetRef>Property_0ugc2qp</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+    </bpmn:userTask>
+    <bpmn:sendTask id="Auftrag_einreichen" name="Auftrag einreichen" messageRef="Message_A9gmwxri">
+      <bpmn:documentation>## Auftrag einreichen: Überblick
+
+Im Prozessmodell "AddOrder" ist der "Send-Task" "Auftrag einreichen" entscheidend. Er sendet eine Nachricht an einen anderen Prozess, um einen neuen Auftrag zu starten oder einen bestehenden fortzusetzen.
+
+## Nachrichtengenerierung
+
+Beim Aktivieren des Tasks wird automatisch eine Nachricht mit Auftragsdetails und Kundeninformationen erstellt. Diese ist so aufgebaut, dass der empfangende Prozess sie direkt verarbeiten kann.
+
+## Prozessfortführung
+
+Der empfangende Prozess fängt die Nachricht mit einem "Catch-Event" auf. Dies leitet die Bearbeitung des Auftrags ein oder aktualisiert den Status eines bestehenden Auftrags.
+
+## Vorteile
+
+Die klare Trennung und zuverlässige Kommunikation zwischen den Prozessen durch "Send-Tasks" verbessert die Wartung, Skalierung und Transparenz des Systems.</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="payload" value="return {&#10;    produkt: dataObjects.auftrag.produkt,&#10;    menge: dataObjects.auftrag.menge&#10;}" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0rz02v1</bpmn:incoming>
+      <bpmn:outgoing>Flow_04e5uqm</bpmn:outgoing>
+      <bpmn:property id="Property_0j8uk7x" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_0av5j2v">
+        <bpmn:sourceRef>auftrag</bpmn:sourceRef>
+        <bpmn:targetRef>Property_0j8uk7x</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+    </bpmn:sendTask>
+  </bpmn:process>
+  <bpmn:message id="Message_A9gmwxri" name="BookOrder" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1cidyxu">
+      <bpmndi:BPMNShape id="Participant_0px403d_di" bpmnElement="AddOrderMsg" isHorizontal="true">
+        <dc:Bounds x="5" y="4" width="1245" height="476" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_02e6ooj_di" bpmnElement="Lane_02e6ooj" isHorizontal="true">
+        <dc:Bounds x="35" y="250" width="1215" height="230" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0lqx87w_di" bpmnElement="Lane_0lqx87w" isHorizontal="true">
+        <dc:Bounds x="35" y="4" width="1215" height="246" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="92" y="112" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="70" y="155" width="81" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1nenmhi_di" bpmnElement="Gateway_1nenmhi" isMarkerVisible="true">
+        <dc:Bounds x="785" y="335" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="780" y="305" width="60" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_188rxeb_di" bpmnElement="Gateway_188rxeb" isMarkerVisible="true">
+        <dc:Bounds x="205" y="105" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_160n41f_di" bpmnElement="Event_160n41f">
+        <dc:Bounds x="1172" y="342" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1155" y="385" width="71" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_1yo7osn_di" bpmnElement="auftrag">
+        <dc:Bounds x="622" y="35" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="672" y="43" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0kbhwvb_di" bpmnElement="Auftrag_einstellen">
+        <dc:Bounds x="350" y="90" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_14cb41c_di" bpmnElement="Auftrag_genehmigen">
+        <dc:Bounds x="590" y="320" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_174gzth_di" bpmnElement="Auftrag_einreichen">
+        <dc:Bounds x="950" y="320" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0919w0q_di" bpmnElement="Flow_0919w0q">
+        <di:waypoint x="128" y="130" />
+        <di:waypoint x="205" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ifmesk_di" bpmnElement="Flow_0ifmesk">
+        <di:waypoint x="450" y="130" />
+        <di:waypoint x="530" y="130" />
+        <di:waypoint x="530" y="360" />
+        <di:waypoint x="590" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0x3zs9j_di" bpmnElement="Flow_0x3zs9j">
+        <di:waypoint x="690" y="360" />
+        <di:waypoint x="785" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0mdjqvb_di" bpmnElement="Flow_0mdjqvb">
+        <di:waypoint x="255" y="130" />
+        <di:waypoint x="350" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_041z2da_di" bpmnElement="Flow_041z2da">
+        <di:waypoint x="810" y="385" />
+        <di:waypoint x="810" y="450" />
+        <di:waypoint x="230" y="450" />
+        <di:waypoint x="230" y="155" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0rz02v1_di" bpmnElement="Flow_0rz02v1">
+        <di:waypoint x="835" y="360" />
+        <di:waypoint x="950" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04e5uqm_di" bpmnElement="Flow_04e5uqm">
+        <di:waypoint x="1050" y="360" />
+        <di:waypoint x="1172" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_1x0953j_di" bpmnElement="DataInputAssociation_1x0953j">
+        <di:waypoint x="622" y="63" />
+        <di:waypoint x="446" y="92" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0g4ks1u_di" bpmnElement="DataOutputAssociation_0g4ks1u">
+        <di:waypoint x="450" y="117" />
+        <di:waypoint x="622" y="70" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_1ho724r_di" bpmnElement="DataInputAssociation_1ho724r">
+        <di:waypoint x="640" y="85" />
+        <di:waypoint x="640" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_0av5j2v_di" bpmnElement="DataInputAssociation_0av5j2v">
+        <di:waypoint x="658" y="74" />
+        <di:waypoint x="974" y="320" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
+2:["$","$L6",null,{"xml":"$7"}]
+5:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"charSet":"utf-8"}],["$","title","2",{"children":"Create Next App"}],["$","meta","3",{"name":"description","content":"Generated by create next app"}],["$","link","4",{"rel":"icon","href":"/favicon.ico","type":"image/x-icon","sizes":"16x16"}],["$","meta","5",{"name":"next-size-adjust"}]]
+1:null
